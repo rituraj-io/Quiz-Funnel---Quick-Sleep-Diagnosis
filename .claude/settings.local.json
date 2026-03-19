@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npx create-next-app@latest temp-next-app --typescript --tailwind --eslint --app --src-dir --import-alias \"@/*\" --use-npm --no-turbopack)",
+      "Bash(rm -rf temp-next-app)",
+      "Bash(printf nonyesn:*)",
+      "Bash(cp -r temp-next-app/.gitignore temp-next-app/AGENTS.md temp-next-app/CLAUDE.md temp-next-app/README.md temp-next-app/eslint.config.mjs temp-next-app/next-env.d.ts temp-next-app/next.config.ts temp-next-app/package-lock.json temp-next-app/package.json temp-next-app/postcss.config.mjs temp-next-app/tsconfig.json .)",
+      "Bash(cp -r temp-next-app/public temp-next-app/src temp-next-app/node_modules temp-next-app/.next .)",
+      "Bash(cd:*)"
+    ]
+  }
+}
