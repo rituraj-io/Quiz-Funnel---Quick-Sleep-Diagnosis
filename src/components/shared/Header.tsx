@@ -101,11 +101,13 @@ export default function Header() {
 					</Link>
 				</div>
 
-				{/* Mobile hamburger button */}
+				{/* Mobile: language switcher + hamburger */}
+				<div className="md:hidden flex items-center gap-2">
+					<LanguageSwitcher />
 				<button
 					ref={buttonRef}
 					type="button"
-					className="md:hidden flex flex-col justify-center items-center w-10 h-10 cursor-pointer"
+					className="flex flex-col justify-center items-center w-10 h-10 cursor-pointer"
 					onClick={() => setMenuOpen(!menuOpen)}
 					aria-label={menuOpen ? 'Close menu' : 'Open menu'}
 					aria-expanded={menuOpen}>
@@ -128,6 +130,7 @@ export default function Header() {
 						}}
 					/>
 				</button>
+				</div>
 			</div>
 
 			{/* Mobile menu overlay */}
@@ -157,9 +160,6 @@ export default function Header() {
 						onClick={() => setMenuOpen(false)}>
 						{t.header.community}
 					</Link>
-					<div className="py-3">
-						<LanguageSwitcher />
-					</div>
 					<Link
 						href="/quiz"
 						className="btn-primary mt-2 text-center font-[family-name:var(--font-heading)] font-semibold text-[16px] text-white bg-dark-teal px-6 py-3 rounded-full"

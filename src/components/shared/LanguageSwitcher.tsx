@@ -63,7 +63,7 @@ export default function LanguageSwitcher() {
 			</button>
 
 			<div
-				className="absolute top-full mt-2 end-0 min-w-[160px] rounded-xl bg-white/95 backdrop-blur-[12px] py-1.5 transition-all duration-200"
+				className="absolute top-full mt-2 end-0 z-[60] min-w-[160px] rounded-xl bg-white/95 backdrop-blur-[12px] py-1.5 transition-all duration-200"
 				style={{
 					boxShadow: '0px 20px 40px rgba(0, 34, 36, 0.06)',
 					opacity: open ? 1 : 0,
