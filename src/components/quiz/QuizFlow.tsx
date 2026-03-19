@@ -5,17 +5,19 @@ import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import Link from 'next/link';
 import { quizQuestions } from '@/data/quizQuestions';
+import { useTranslation } from '@/i18n';
 
 const OPTION_LETTERS = ['A', 'B', 'C', 'D'];
 
 export default function QuizFlow() {
 	const router = useRouter();
+	const { t, locale } = useTranslation();
 	const [currentIndex, setCurrentIndex] = useState(0);
 	const [answers, setAnswers] = useState<(number | null)[]>(new Array(quizQuestions.length).fill(null));
 	const [slideDirection, setSlideDirection] = useState<'enter-right' | 'enter-left' | null>(null);
 	const [isAnimating, setIsAnimating] = useState(false);
 
-	const question = quizQuestions[currentIndex];
+	const question = t.quiz.questions[currentIndex];
 	const selectedOption = answers[currentIndex];
 	const isFirstQuestion = currentIndex === 0;
 	const isLastQuestion = currentIndex === quizQuestions.length - 1;
@@ -60,7 +62,7 @@ export default function QuizFlow() {
 		if (selectedOption === null || isAnimating) return;
 
 		if (!isLastQuestion) {
-			animateTo(currentIndex + 1, 'enter-right');
+			animateTo(currentIndex + 1, locale === 'ar' ? 'enter-left' : 'enter-right');
 		} else {
 			// Calculate final scores
 			let rm = 0;
@@ -74,12 +76,12 @@ export default function QuizFlow() {
 			const resultType = lr > rm ? 'low_recovery' : 'racing_mind';
 			router.push(`/results?type=${resultType}&rm=${rm}&lr=${lr}`);
 		}
-	}, [selectedOption, isAnimating, isLastQuestion, currentIndex, answers, animateTo, router]);
+	}, [selectedOption, isAnimating, isLastQuestion, currentIndex, answers, animateTo, router, locale]);
 
 	const handleBack = useCallback(() => {
 		if (isFirstQuestion || isAnimating) return;
-		animateTo(currentIndex - 1, 'enter-left');
-	}, [isFirstQuestion, isAnimating, currentIndex, animateTo]);
+		animateTo(currentIndex - 1, locale === 'ar' ? 'enter-right' : 'enter-left');
+	}, [isFirstQuestion, isAnimating, currentIndex, animateTo, locale]);
 
 	return (
 		<div
@@ -133,7 +135,7 @@ export default function QuizFlow() {
 					<span
 						className="font-[family-name:var(--font-body)] font-normal text-[14px]"
 						style={{ color: 'rgba(120, 163, 166, 0.6)' }}>
-						{currentIndex + 1} of {quizQuestions.length}
+						{currentIndex + 1} {t.quiz.of} {quizQuestions.length}
 					</span>
 				</div>
 
@@ -190,10 +192,10 @@ export default function QuizFlow() {
 							const isSelected = selectedOption === idx;
 							return (
 								<button
-									key={`${question.id}-${idx}`}
+									key={`${currentIndex}-${idx}`}
 									type="button"
 									onClick={() => handleSelect(idx)}
-									className="group relative flex items-center gap-4 md:gap-6 rounded-xl overflow-hidden text-left cursor-pointer px-5 py-5 md:px-8 md:py-7 transition-all duration-300"
+									className="group relative flex items-center gap-4 md:gap-6 rounded-xl overflow-hidden text-start cursor-pointer px-5 py-5 md:px-8 md:py-7 transition-all duration-300"
 									style={{
 										backgroundColor: isSelected
 											? 'rgba(7, 57, 60, 0.4)'
@@ -223,7 +225,7 @@ export default function QuizFlow() {
 									<span
 										className="font-[family-name:var(--font-heading)] font-medium text-[15px] md:text-[17px] leading-[24px] flex-1"
 										style={{ color: '#FFFFFF' }}>
-										{option.text}
+										{option}
 									</span>
 
 									{/* Check indicator */}
@@ -264,10 +266,10 @@ export default function QuizFlow() {
 								alt=""
 								width={20}
 								height={24}
-								className="-scale-y-100 rotate-180"
+								className="-scale-y-100 rotate-180 rtl-flip"
 								unoptimized
 							/>
-							Back
+							{t.quiz.back}
 						</button>
 					)}
 
@@ -282,7 +284,7 @@ export default function QuizFlow() {
 							color: '#002224',
 							boxShadow: selectedOption !== null ? '0px 20px 40px rgba(144, 221, 240, 0.15)' : 'none',
 						}}>
-						{isLastQuestion ? 'See My Results' : 'Continue'}
+						{isLastQuestion ? t.quiz.seeResults : t.quiz.continue}
 					</button>
 				</div>
 			</div>

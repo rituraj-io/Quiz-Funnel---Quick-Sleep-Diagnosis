@@ -1,39 +1,44 @@
+'use client';
+
 import Image from 'next/image';
 import Link from 'next/link';
+import { useTranslation } from '@/i18n';
 
 export default function HeroSection() {
+	const { t } = useTranslation();
+
 	return (
 		<section className="w-full bg-gradient-to-b from-[#0A090C] to-[#07393C] pt-36 pb-12 px-5 md:pt-48 md:pb-20 md:px-6">
-			<div className="mx-auto max-w-[1100px] flex flex-col items-start text-left md:items-center md:text-center">
+			<div className="mx-auto max-w-[1100px] flex flex-col items-start text-start md:items-center md:text-center">
 				{/* Badge */}
 				<span
 					className="animate-fade-up inline-block rounded-full px-4 py-1.5 text-[#85D2E5] bg-[#07393C] font-[family-name:var(--font-heading)] font-semibold text-xs md:text-sm uppercase"
 					style={{ letterSpacing: '0.7px', animationDelay: '0.2s' }}>
-					The Science of Rest
+					{t.hero.badge}
 				</span>
 
 				<div className="mt-2" />
 
 				{/* Heading */}
 				<h1
-					className="animate-fade-up font-[family-name:var(--font-heading)] font-extrabold text-left md:text-center text-[40px] leading-[42px] tracking-[-1.2px] md:text-[72px] md:leading-[72px] md:tracking-[-2px] lg:text-[96px] lg:leading-[96px] lg:tracking-[-2.4px]"
+					className="animate-fade-up font-[family-name:var(--font-heading)] font-extrabold text-start md:text-center text-[40px] leading-[42px] tracking-[-1.2px] md:text-[72px] md:leading-[72px] md:tracking-[-2px] lg:text-[96px] lg:leading-[96px] lg:tracking-[-2.4px]"
 					style={{ animationDelay: '0.4s' }}>
-					<span className="text-[#FCF8F9]">Your sleep problems</span>
+					<span className="text-[#FCF8F9]">{t.hero.headingWhite}</span>
 					<br />
-					<span className="text-[#85D2E5]">aren&apos;t random.</span>
+					<span className="text-[#85D2E5]">{t.hero.headingBlue}</span>
 				</h1>
 
 				<div className="mt-5 md:mt-8" />
 
 				{/* Subtitle */}
 				<p
-					className="animate-fade-up font-[family-name:var(--font-body)] font-normal text-left md:text-center max-w-[672px] text-base md:text-2xl"
+					className="animate-fade-up font-[family-name:var(--font-body)] font-normal text-start md:text-center max-w-[672px] text-base md:text-2xl"
 					style={{
 						lineHeight: '1.45',
 						color: 'rgba(120, 163, 166, 0.8)',
 						animationDelay: '0.6s',
 					}}>
-					Identify your unique Sleep Architecture and get a personalized path to deep, restorative rest.
+					{t.hero.subtitle}
 				</p>
 
 				<div className="mt-6 md:mt-8" />
@@ -45,17 +50,17 @@ export default function HeroSection() {
 					<Link
 						href="/quiz"
 						className="btn-primary rounded-full px-8 py-4 bg-[#85D2E5] text-[#002224] font-[family-name:var(--font-heading)] font-bold text-base md:text-lg text-center w-full md:w-auto">
-						Find Your Sleep Type — Free Quiz
+						{t.hero.ctaPrimary}
 					</Link>
 
 					<button className="flex flex-row items-center justify-center gap-2 text-[#FCF8F9] font-[family-name:var(--font-heading)] font-semibold text-base bg-transparent border-none cursor-pointer">
-						Explore the Science
+						{t.hero.ctaSecondary}
 						<Image
 							src="/images/arrow-right.svg"
 							alt=""
 							width={24}
 							height={28}
-							className="-scale-y-100"
+							className="-scale-y-100 rtl-flip"
 							unoptimized
 						/>
 					</button>

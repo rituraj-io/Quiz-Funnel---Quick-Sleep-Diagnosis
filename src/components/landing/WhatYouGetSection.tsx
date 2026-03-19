@@ -1,21 +1,11 @@
-import Image from 'next/image';
+'use client';
 
-const features = [
-	{
-		title: 'Personalized Sleep Archetype',
-		description: 'Understand if you are a Lion, Wolf, Bear, or Dolphin based on your DNA.',
-	},
-	{
-		title: 'Drift Atmosphere Engine',
-		description: 'AI-generated sonic landscapes that adapt to your heart rate in real-time.',
-	},
-	{
-		title: 'Nightly Cognitive Offloading',
-		description: 'Guided tools to clear the mental clutter before your eyes even close.',
-	},
-];
+import Image from 'next/image';
+import { useTranslation } from '@/i18n';
 
 export default function WhatYouGetSection() {
+	const { t } = useTranslation();
+
 	return (
 		<section style={{ backgroundColor: '#07393C' }}>
 			<div className="mx-auto max-w-[1280px] px-5 md:px-8 py-16 md:py-32">
@@ -26,7 +16,7 @@ export default function WhatYouGetSection() {
 						<h2
 							className="font-[family-name:var(--font-heading)] font-bold text-[32px] leading-[34px] md:text-[48px] md:leading-[48px]"
 							style={{ color: '#FCF8F9' }}>
-							A complete ecosystem for your nocturnal life.
+							{t.whatYouGet.heading}
 						</h2>
 
 						{/* Gap */}
@@ -34,7 +24,7 @@ export default function WhatYouGetSection() {
 
 						{/* Feature list */}
 						<div className="flex flex-col gap-6 md:gap-8">
-							{features.map(feature => (
+							{t.whatYouGet.features.map(feature => (
 								<div key={feature.title} className="flex flex-row gap-3 md:gap-4">
 									{/* Check icon */}
 									<div className="mt-0.5 shrink-0">
@@ -128,7 +118,7 @@ export default function WhatYouGetSection() {
 											letterSpacing: '1.2px',
 											color: '#85D2E5',
 										}}>
-										Current State
+										{t.whatYouGet.cardLabel}
 									</span>
 									<span
 										className="font-[family-name:var(--font-body)] font-bold text-base md:text-lg"
@@ -136,7 +126,7 @@ export default function WhatYouGetSection() {
 											lineHeight: '28px',
 											color: '#FCF8F9',
 										}}>
-										Deep Recovery Phase
+										{t.whatYouGet.cardTitle}
 									</span>
 								</div>
 

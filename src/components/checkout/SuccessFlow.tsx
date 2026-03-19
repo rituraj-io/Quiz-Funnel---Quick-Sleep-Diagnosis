@@ -3,30 +3,14 @@
 import { useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import Image from 'next/image';
-import type { SleepType } from '@/data/resultContent';
+import { useTranslation } from '@/i18n';
 
-const NEXT_STEPS = [
-	{
-		step: '01',
-		title: 'Check your email',
-		description: 'Your login and program access link are on the way.',
-	},
-	{
-		step: '02',
-		title: 'Start tonight',
-		description: 'Begin Day 1 of your wind-down routine — takes 15 minutes.',
-	},
-	{
-		step: '03',
-		title: 'Log tomorrow morning',
-		description: 'Record your first sleep journal entry when you wake up.',
-	},
-];
+type SleepType = 'racing_mind' | 'low_recovery';
 
 export default function SuccessFlow() {
 	const searchParams = useSearchParams();
+	const { t } = useTranslation();
 	const sleepType: SleepType = searchParams.get('type') === 'low_recovery' ? 'low_recovery' : 'racing_mind';
-	const sleepLabel = sleepType === 'racing_mind' ? 'Racing Mind' : 'Low Recovery';
 
 	return (
 		<div
@@ -108,18 +92,18 @@ export default function SuccessFlow() {
 				<h1
 					className="font-[family-name:var(--font-heading)] font-bold text-[32px] leading-[36px] md:text-[48px] md:leading-[52px] mb-4 md:mb-5 success-reveal"
 					style={{ color: '#FCF8F9', letterSpacing: '-1.5px', animationDelay: '0.3s' }}>
-					You&apos;re in. Let&apos;s fix your sleep.
+					{t.success.heading}
 				</h1>
 
 				<p
 					className="font-[family-name:var(--font-body)] font-normal text-[16px] md:text-[18px] mb-10 md:mb-14 success-reveal"
 					style={{ color: 'rgba(120, 163, 166, 0.8)', lineHeight: '1.6', animationDelay: '0.45s' }}>
-					Your personalized 21-day protocol is ready. Here&apos;s what happens next:
+					{t.success.subtitle}
 				</p>
 
 				{/* Next steps */}
-				<div className="flex flex-col gap-4 md:gap-5 mb-10 md:mb-14 text-left">
-					{NEXT_STEPS.map((item, i) => (
+				<div className="flex flex-col gap-4 md:gap-5 mb-10 md:mb-14 text-start">
+					{t.success.steps.map((item, i) => (
 						<div
 							key={item.step}
 							className="flex gap-4 md:gap-5 rounded-xl md:rounded-2xl p-5 md:p-6 success-reveal"
@@ -167,17 +151,17 @@ export default function SuccessFlow() {
 					<span
 						className="font-[family-name:var(--font-heading)] font-semibold text-[13px] uppercase block mb-1"
 						style={{ color: '#85D2E5', letterSpacing: '1px' }}>
-						Your sleep type
+						{t.success.sleepTypeLabel}
 					</span>
 					<span
 						className="font-[family-name:var(--font-heading)] font-bold text-[20px] md:text-[24px]"
 						style={{ color: '#FCF8F9' }}>
-						{sleepLabel}
+						{t.checkout.orderSleepLabel[sleepType]}
 					</span>
 					<p
 						className="font-[family-name:var(--font-body)] font-normal text-[13px] md:text-[14px] mt-2"
 						style={{ color: 'rgba(120, 163, 166, 0.6)', lineHeight: '1.5' }}>
-						Your protocol has been built around this diagnosis. Everything you see is tailored to you.
+						{t.success.sleepTypeDescription}
 					</p>
 				</div>
 
@@ -187,13 +171,13 @@ export default function SuccessFlow() {
 						href="/"
 						className="btn-primary inline-flex items-center justify-center rounded-full px-10 py-4 font-[family-name:var(--font-heading)] font-bold text-[16px]"
 						style={{ backgroundColor: '#85D2E5', color: '#002224' }}>
-						Go to Your Program
+						{t.success.ctaButton}
 					</Link>
 
 					<p
 						className="font-[family-name:var(--font-body)] font-normal text-[12px] mt-4"
 						style={{ color: 'rgba(120, 163, 166, 0.4)' }}>
-						Questions? Reach us at support@getdrift.co
+						{t.success.contactText}
 					</p>
 				</div>
 			</main>

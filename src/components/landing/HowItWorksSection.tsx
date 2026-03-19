@@ -1,28 +1,11 @@
 'use client';
 
 import { useScrollReveal } from '@/hooks/useScrollReveal';
-
-const steps = [
-	{
-		number: '01',
-		title: 'The Assessment',
-		description: 'Take our clinical-grade assessment to identify your sleep archetype and circadian alignment.',
-	},
-	{
-		number: '02',
-		title: 'The Protocol',
-		description: 'Receive a bespoke nightly ritual including guided decompression and atmosphere settings.',
-	},
-	{
-		number: '03',
-		title: 'The Deep Rest',
-		description:
-			'Experience the physical sensation of your body finally letting go and dropping into deep recovery.',
-	},
-];
+import { useTranslation } from '@/i18n';
 
 export default function HowItWorksSection() {
 	const { ref, isVisible } = useScrollReveal(0.1);
+	const { t } = useTranslation();
 
 	return (
 		<section ref={ref} className="py-16 md:py-[128px]" style={{ backgroundColor: 'var(--color-vista-white)' }}>
@@ -30,14 +13,14 @@ export default function HowItWorksSection() {
 				{/* Heading */}
 				<h2
 					className={`text-center font-[family-name:var(--font-heading)] font-extrabold text-swamp text-[32px] leading-[34px] tracking-[-1.5px] md:text-[60px] md:leading-[60px] md:tracking-[-3px] reveal ${isVisible ? 'is-visible' : ''}`}>
-					Your transition to stillness.
+					{t.howItWorks.heading}
 				</h2>
 
 				<div className="mt-12 md:mt-[96px]" />
 
 				{/* Steps — staggered */}
 				<div className="grid grid-cols-1 gap-12 md:grid-cols-3 md:gap-[64px]">
-					{steps.map((step, i) => (
+					{t.howItWorks.steps.map((step, i) => (
 						<div
 							key={step.number}
 							className={`relative isolate flex flex-col reveal ${isVisible ? 'is-visible' : ''}`}

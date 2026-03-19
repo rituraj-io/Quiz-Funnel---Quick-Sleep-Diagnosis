@@ -1,6 +1,11 @@
+'use client';
+
 import Link from 'next/link';
+import { useTranslation } from '@/i18n';
 
 export default function NotFound() {
+	const { t } = useTranslation();
+
 	return (
 		<main className="relative min-h-screen w-full bg-gradient-to-b from-[#0A090C] to-[#07393C] flex flex-col items-center justify-center px-5 overflow-hidden">
 			{/* Ambient decorative orbs */}
@@ -30,9 +35,9 @@ export default function NotFound() {
 				<h1
 					className="animate-fade-up font-[family-name:var(--font-heading)] font-bold text-[28px] leading-[34px] tracking-[-0.6px] md:text-[40px] md:leading-[46px] md:tracking-[-1px] mt-2"
 					style={{ animationDelay: '0.4s' }}>
-					<span className="text-[#FCF8F9]">This page drifted</span>
+					<span className="text-[#FCF8F9]">{t.notFound.headingWhite}</span>
 					<br />
-					<span className="text-[#85D2E5]">into deep sleep.</span>
+					<span className="text-[#85D2E5]">{t.notFound.headingBlue}</span>
 				</h1>
 
 				{/* Body copy */}
@@ -43,7 +48,7 @@ export default function NotFound() {
 						color: 'rgba(120, 163, 166, 0.8)',
 						animationDelay: '0.6s',
 					}}>
-					The page you&apos;re looking for doesn&apos;t exist or has been moved. Let&apos;s get you back on track.
+					{t.notFound.body}
 				</p>
 
 				{/* CTA */}
@@ -51,7 +56,7 @@ export default function NotFound() {
 					<Link
 						href="/"
 						className="btn-primary inline-block rounded-full px-8 py-4 bg-[#85D2E5] text-[#002224] font-[family-name:var(--font-heading)] font-bold text-base md:text-lg">
-						Return Home
+						{t.notFound.button}
 					</Link>
 				</div>
 			</div>

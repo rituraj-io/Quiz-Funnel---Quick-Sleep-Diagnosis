@@ -1,29 +1,11 @@
 'use client';
 
 import { useState } from 'react';
-
-type FAQItem = {
-	question: string;
-	answer: string;
-};
-
-const faqs: FAQItem[] = [
-	{
-		question: 'How is this different from a sound machine?',
-		answer: "Drift doesn't just mask noise — it identifies your specific sleep disruption pattern and builds a protocol around cognitive and behavioral techniques proven to improve sleep architecture.",
-	},
-	{
-		question: 'Do I need a wearable device?',
-		answer: 'No. Drift is entirely software-based. While wearable data can enhance your experience, the core protocol works with just your subjective sleep reports and daily check-ins.',
-	},
-	{
-		question: 'How long before I see results?',
-		answer: 'Most users report noticeable improvements within the first 7 days. The full 21-day protocol is designed to create lasting behavioral changes that compound over time.',
-	},
-];
+import { useTranslation } from '@/i18n';
 
 export default function FAQSection() {
 	const [openIndex, setOpenIndex] = useState<number | null>(null);
+	const { t } = useTranslation();
 
 	function toggle(index: number) {
 		setOpenIndex(openIndex === index ? null : index);
@@ -36,7 +18,7 @@ export default function FAQSection() {
 				<h2
 					className="text-center font-[family-name:var(--font-heading)] font-bold text-[#002224] text-2xl md:text-4xl"
 					style={{ lineHeight: '1.2' }}>
-					Frequently Asked Questions
+					{t.faq.heading}
 				</h2>
 
 				{/* Gap */}
@@ -44,7 +26,7 @@ export default function FAQSection() {
 
 				{/* FAQ list */}
 				<ul className="flex flex-col gap-6">
-					{faqs.map((faq, index) => {
+					{t.faq.items.map((faq, index) => {
 						const isOpen = openIndex === index;
 						return (
 							<li
@@ -54,7 +36,7 @@ export default function FAQSection() {
 								{/* Question row */}
 								<button
 									type="button"
-									className="flex w-full cursor-pointer items-center justify-between gap-4 text-left"
+									className="flex w-full cursor-pointer items-center justify-between gap-4 text-start"
 									onClick={() => toggle(index)}
 									aria-expanded={isOpen}>
 									<span

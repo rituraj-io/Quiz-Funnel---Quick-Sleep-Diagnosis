@@ -4,7 +4,9 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { loadStripe } from '@stripe/stripe-js';
 import { Elements, PaymentElement, useStripe, useElements } from '@stripe/react-stripe-js';
-import type { SleepType } from '@/data/resultContent';
+import { useTranslation } from '@/i18n';
+
+type SleepType = 'racing_mind' | 'low_recovery';
 
 const stripePromise = process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY
 	? loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY)
@@ -14,6 +16,7 @@ function PaymentForm({ sleepType, selectedPlan }: { sleepType: SleepType; select
 	const stripe = useStripe();
 	const elements = useElements();
 	const router = useRouter();
+	const { t } = useTranslation();
 	const [processing, setProcessing] = useState(false);
 	const [error, setError] = useState<string | null>(null);
 
@@ -64,7 +67,7 @@ function PaymentForm({ sleepType, selectedPlan }: { sleepType: SleepType; select
 				disabled={!stripe || processing}
 				className="btn-primary w-full rounded-xl py-4 mt-5 font-[family-name:var(--font-heading)] font-bold text-[16px] cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
 				style={{ backgroundColor: '#85D2E5', color: '#002224' }}>
-				{processing ? 'Processing...' : 'Start My Program'}
+				{processing ? t.checkout.processing : t.checkout.startButton}
 			</button>
 		</form>
 	);
@@ -79,12 +82,14 @@ export default function StripeCheckoutForm({
 	sleepType: SleepType;
 	selectedPlan: string;
 }) {
+	const { t } = useTranslation();
+
 	if (!stripePromise) {
 		return (
 			<p
 				className="font-[family-name:var(--font-body)] text-[14px] text-center py-8"
 				style={{ color: '#78A3A6' }}>
-				Stripe publishable key not configured.
+				{t.checkout.stripeNotConfigured}
 			</p>
 		);
 	}

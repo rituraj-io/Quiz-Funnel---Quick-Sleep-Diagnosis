@@ -3,8 +3,11 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { useState, useEffect, useRef } from 'react';
+import { useTranslation } from '@/i18n';
+import LanguageSwitcher from './LanguageSwitcher';
 
 export default function Header() {
+	const { t } = useTranslation();
 	const [menuOpen, setMenuOpen] = useState(false);
 	const menuRef = useRef<HTMLDivElement>(null);
 	const buttonRef = useRef<HTMLButtonElement>(null);
@@ -74,26 +77,29 @@ export default function Header() {
 					<Link
 						href="/"
 						className="font-[family-name:var(--font-heading)] font-bold text-[16px] leading-[24px] text-dark-teal">
-						Home
+						{t.header.home}
 					</Link>
 					<Link
 						href="/science"
 						className="font-[family-name:var(--font-heading)] font-normal text-[16px] leading-[24px] text-stormy-teal opacity-70">
-						Science
+						{t.header.science}
 					</Link>
 					<Link
 						href="/community"
 						className="font-[family-name:var(--font-heading)] font-normal text-[16px] leading-[24px] text-stormy-teal opacity-70">
-						Community
+						{t.header.community}
 					</Link>
 				</nav>
 
-				{/* Desktop CTA */}
-				<Link
-					href="/quiz"
-					className="btn-primary hidden md:inline-flex font-[family-name:var(--font-heading)] font-semibold text-[16px] text-white bg-dark-teal px-6 py-3 rounded-full">
-					Take the Quiz
-				</Link>
+				{/* Desktop language switcher + CTA */}
+				<div className="hidden md:flex items-center gap-4">
+					<LanguageSwitcher />
+					<Link
+						href="/quiz"
+						className="btn-primary inline-flex font-[family-name:var(--font-heading)] font-semibold text-[16px] text-white bg-dark-teal px-6 py-3 rounded-full">
+						{t.header.takeQuiz}
+					</Link>
+				</div>
 
 				{/* Mobile hamburger button */}
 				<button
@@ -137,25 +143,28 @@ export default function Header() {
 						href="/"
 						className="font-[family-name:var(--font-heading)] font-bold text-[16px] leading-[24px] text-dark-teal py-3"
 						onClick={() => setMenuOpen(false)}>
-						Home
+						{t.header.home}
 					</Link>
 					<Link
 						href="/science"
 						className="font-[family-name:var(--font-heading)] font-normal text-[16px] leading-[24px] text-stormy-teal py-3"
 						onClick={() => setMenuOpen(false)}>
-						Science
+						{t.header.science}
 					</Link>
 					<Link
 						href="/community"
 						className="font-[family-name:var(--font-heading)] font-normal text-[16px] leading-[24px] text-stormy-teal py-3"
 						onClick={() => setMenuOpen(false)}>
-						Community
+						{t.header.community}
 					</Link>
+					<div className="py-3">
+						<LanguageSwitcher />
+					</div>
 					<Link
 						href="/quiz"
 						className="btn-primary mt-2 text-center font-[family-name:var(--font-heading)] font-semibold text-[16px] text-white bg-dark-teal px-6 py-3 rounded-full"
 						onClick={() => setMenuOpen(false)}>
-						Take the Quiz
+						{t.header.takeQuiz}
 					</Link>
 				</nav>
 			</div>

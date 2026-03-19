@@ -1,16 +1,23 @@
 import type { Metadata } from 'next';
-import { Plus_Jakarta_Sans, Manrope } from 'next/font/google';
+import { Plus_Jakarta_Sans, Manrope, Noto_Sans_Arabic } from 'next/font/google';
+import { LanguageProvider } from '@/i18n';
 import './globals.css';
 
 const plusJakartaSans = Plus_Jakarta_Sans({
 	variable: '--font-plus-jakarta-sans',
-	subsets: ['latin'],
+	subsets: ['latin', 'latin-ext'],
 	weight: ['400', '500', '600', '700', '800'],
 });
 
 const manrope = Manrope({
 	variable: '--font-manrope',
-	subsets: ['latin'],
+	subsets: ['latin', 'cyrillic-ext'],
+	weight: ['400', '500', '600', '700'],
+});
+
+const notoSansArabic = Noto_Sans_Arabic({
+	variable: '--font-noto-arabic',
+	subsets: ['arabic'],
 	weight: ['400', '500', '600', '700'],
 });
 
@@ -59,8 +66,21 @@ export default function RootLayout({
 	children: React.ReactNode;
 }>) {
 	return (
-		<html lang="en" className={`${plusJakartaSans.variable} ${manrope.variable}`}>
-			<body className="min-h-screen antialiased">{children}</body>
+		<html
+			lang="en"
+			suppressHydrationWarning
+			className={`${plusJakartaSans.variable} ${manrope.variable} ${notoSansArabic.variable}`}
+		>
+			<head>
+				<script
+					dangerouslySetInnerHTML={{
+						__html: `try{var l=localStorage.getItem('drift-lang');if(l==='ar'){document.documentElement.dir='rtl';document.documentElement.lang='ar';document.documentElement.classList.add('font-arabic')}else if(l==='ru'){document.documentElement.lang='ru';document.documentElement.classList.add('font-russian')}}catch(e){}`,
+					}}
+				/>
+			</head>
+			<body className="min-h-screen antialiased">
+				<LanguageProvider>{children}</LanguageProvider>
+			</body>
 		</html>
 	);
 }

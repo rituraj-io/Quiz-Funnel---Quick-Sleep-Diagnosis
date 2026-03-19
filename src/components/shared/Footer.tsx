@@ -1,35 +1,19 @@
+'use client';
+
 import Image from 'next/image';
 import Link from 'next/link';
 import ScrollReveal from '@/components/shared/ScrollReveal';
+import { useTranslation } from '@/i18n';
 
-const NAV_COLUMNS = [
-	{
-		heading: 'Product',
-		links: [
-			{ label: 'Quiz', href: '/quiz' },
-			{ label: 'Science', href: '/science' },
-			{ label: 'Pricing', href: '/pricing' },
-		],
-	},
-	{
-		heading: 'Company',
-		links: [
-			{ label: 'About Us', href: '/about' },
-			{ label: 'Community', href: '/community' },
-			{ label: 'Press', href: '/press' },
-		],
-	},
-	{
-		heading: 'Legal',
-		links: [
-			{ label: 'Privacy Policy', href: '/privacy' },
-			{ label: 'Terms of Service', href: '/terms' },
-			{ label: 'Cookie Settings', href: '/cookies' },
-		],
-	},
+const COLUMN_HREFS = [
+	['/quiz', '/science', '/pricing'],
+	['/about', '/community', '/press'],
+	['/privacy', '/terms', '/cookies'],
 ];
 
 export default function Footer() {
+	const { t } = useTranslation();
+
 	return (
 		<footer style={{ backgroundColor: '#0A090C' }}>
 			<ScrollReveal>
@@ -62,22 +46,21 @@ export default function Footer() {
 								lineHeight: '22.75px',
 								color: 'rgba(228, 226, 227, 0.6)',
 							}}>
-							Pioneering the science of restorative rest through personalized protocols and adaptive
-							environments.
+							{t.footer.description}
 						</p>
 					</div>
 
 					{/* Nav columns */}
-					{NAV_COLUMNS.map(col => (
+					{t.footer.columns.map((col, colIndex) => (
 						<div key={col.heading} className="col-span-1 flex flex-col gap-4 md:gap-6">
 							<span className="font-[family-name:var(--font-heading)] font-bold text-[15px] md:text-[16px] leading-6 text-[#FCF8F9]">
 								{col.heading}
 							</span>
 							<ul className="flex flex-col gap-3 md:gap-4">
-								{col.links.map(link => (
+								{col.links.map((link, linkIndex) => (
 									<li key={link.label}>
 										<Link
-											href={link.href}
+											href={COLUMN_HREFS[colIndex][linkIndex]}
 											className="font-[family-name:var(--font-body)] font-normal text-[13px] md:text-[14px] leading-5 transition-opacity hover:opacity-80"
 											style={{
 												letterSpacing: '0.35px',
@@ -104,7 +87,7 @@ export default function Footer() {
 								letterSpacing: '0.3px',
 								color: 'rgba(228, 226, 227, 0.4)',
 							}}>
-							&copy; 2024 Drift Wellness. All rights reserved.
+							{t.footer.copyright}
 						</p>
 
 						{/* Social icons */}

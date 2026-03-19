@@ -4,38 +4,16 @@ import { useState, useEffect } from 'react';
 import { useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import Image from 'next/image';
-import { resultContent, type SleepType } from '@/data/resultContent';
+import { useTranslation } from '@/i18n';
 
-/* ── Social proof stats (same as landing page) ── */
-const STATS = [
-	{ value: '12,000+', label: 'Sleepers diagnosed' },
-	{ value: '4.8/5', label: 'Average rating' },
-	{ value: '92%', label: 'Report better sleep by day 14' },
-];
-
-const TESTIMONIALS = [
-	{
-		quote: 'I used to dread bedtime. By week 2, I was falling asleep in under 15 minutes.',
-		name: 'Sarah M.',
-		type: 'Racing Mind type',
-	},
-	{
-		quote: 'I thought I was just a bad sleeper. The protocol changed my mornings completely.',
-		name: 'James K.',
-		type: 'Low Recovery type',
-	},
-	{
-		quote: "Simple, no BS. I actually stuck with this one because it's only 15 minutes a night.",
-		name: 'Priya R.',
-		type: 'Drift member',
-	},
-];
+type SleepType = 'racing_mind' | 'low_recovery';
 
 export default function ResultsFlow() {
 	const searchParams = useSearchParams();
+	const { t } = useTranslation();
 	const typeParam = searchParams.get('type') as SleepType | null;
 	const sleepType: SleepType = typeParam === 'low_recovery' ? 'low_recovery' : 'racing_mind';
-	const content = resultContent[sleepType];
+	const content = t.results.sleepTypes[sleepType];
 
 	const [phase, setPhase] = useState<'analyzing' | 'results'>('analyzing');
 
@@ -80,12 +58,12 @@ export default function ResultsFlow() {
 				<p
 					className="font-[family-name:var(--font-heading)] font-semibold text-[20px] md:text-[24px] mb-3"
 					style={{ color: '#FCF8F9' }}>
-					Analyzing your sleep pattern...
+					{t.results.analyzingHeading}
 				</p>
 				<p
 					className="font-[family-name:var(--font-body)] font-normal text-[14px] md:text-[16px]"
 					style={{ color: 'rgba(120, 163, 166, 0.6)' }}>
-					Matching your responses to clinical sleep profiles
+					{t.results.analyzingSubtext}
 				</p>
 			</div>
 		);
@@ -136,7 +114,7 @@ export default function ResultsFlow() {
 					{/* ── Left column: Diagnosis + What's happening + Protocol ── */}
 					<div className="md:flex-[1_1_0%]">
 						{/* ── Section 1: Diagnosis reveal ── */}
-						<section className="pt-12 md:pt-20 pb-12 md:pb-16 text-center md:text-left results-reveal">
+						<section className="pt-12 md:pt-20 pb-12 md:pb-16 text-center md:text-start results-reveal">
 							{/* Badge */}
 							<div
 								className="inline-flex items-center gap-2 rounded-full px-4 py-2 mb-6 md:mb-8"
@@ -181,7 +159,7 @@ export default function ResultsFlow() {
 							<h2
 								className="font-[family-name:var(--font-heading)] font-bold text-[18px] md:text-[22px] mb-4 md:mb-5"
 								style={{ color: '#85D2E5', letterSpacing: '-0.5px' }}>
-								What&apos;s happening
+								{t.results.whatsHappeningTitle}
 							</h2>
 							<p
 								className="font-[family-name:var(--font-body)] font-normal text-[15px] md:text-[17px]"
@@ -195,15 +173,15 @@ export default function ResultsFlow() {
 							className="mb-28 md:mb-20 results-reveal"
 							style={{ animationDelay: '0.3s' }}>
 							<h2
-								className="font-[family-name:var(--font-heading)] font-bold text-[22px] md:text-[28px] mb-6 md:mb-10 text-center md:text-left"
+								className="font-[family-name:var(--font-heading)] font-bold text-[22px] md:text-[28px] mb-6 md:mb-10 text-center md:text-start"
 								style={{ color: '#FCF8F9', letterSpacing: '-1px' }}>
-								Your 21-day Drift program includes
+								{t.results.protocolHeading}
 							</h2>
 
 							<div className="flex flex-col gap-4 md:gap-5">
 								{content.protocolIncludes.map((item, i) => (
 									<div
-										key={item.title}
+										key={i}
 										className="flex gap-4 md:gap-5 rounded-xl md:rounded-2xl p-5 md:p-7"
 										style={{
 											backgroundColor: 'rgba(255, 255, 255, 0.04)',
@@ -251,12 +229,12 @@ export default function ResultsFlow() {
 								<h2
 									className="font-[family-name:var(--font-heading)] font-bold text-[22px] md:text-[28px] mb-3 md:mb-4"
 									style={{ color: '#FCF8F9', letterSpacing: '-1px' }}>
-									Ready to fix your sleep?
+									{t.results.ctaHeading}
 								</h2>
 								<p
 									className="font-[family-name:var(--font-body)] font-normal text-[14px] md:text-[16px] mb-5 md:mb-6"
 									style={{ color: 'rgba(120, 163, 166, 0.7)', lineHeight: '1.6' }}>
-									Your personalized program is ready. Choose a plan and start tonight.
+									{t.results.ctaSubtext}
 								</p>
 
 								{/* Desktop-only button (mobile uses sticky footer) */}
@@ -264,13 +242,13 @@ export default function ResultsFlow() {
 									href={`/checkout?type=${sleepType}`}
 									className="hidden md:inline-flex btn-primary items-center justify-center rounded-full px-10 py-4 font-[family-name:var(--font-heading)] font-bold text-[16px]"
 									style={{ backgroundColor: '#85D2E5', color: '#002224' }}>
-									Start Your Program — See Plans
+									{t.results.ctaButton}
 								</Link>
 
 								<p
 									className="hidden md:block font-[family-name:var(--font-body)] font-normal text-[12px] mt-3"
 									style={{ color: 'rgba(120, 163, 166, 0.5)' }}>
-									7-day money-back guarantee. Cancel anytime.
+									{t.results.ctaGuarantee}
 								</p>
 							</section>
 
@@ -278,7 +256,7 @@ export default function ResultsFlow() {
 							<div
 								className="flex items-center justify-center gap-3 md:gap-5 mb-6 md:mb-8 results-reveal"
 								style={{ animationDelay: '0.3s' }}>
-								{STATS.map((stat, i) => (
+								{t.results.stats.map((stat, i) => (
 									<div key={stat.label} className="flex items-center gap-3 md:gap-5">
 										<div className="text-center">
 											<span
@@ -292,7 +270,7 @@ export default function ResultsFlow() {
 												{stat.label}
 											</span>
 										</div>
-										{i < STATS.length - 1 && (
+										{i < t.results.stats.length - 1 && (
 											<div
 												style={{
 													width: '1px',
@@ -323,18 +301,18 @@ export default function ResultsFlow() {
 								<p
 									className="font-[family-name:var(--font-body)] font-normal text-[13px] md:text-[14px] mb-3"
 									style={{ lineHeight: '1.6', color: 'rgba(252, 248, 249, 0.8)' }}>
-									&ldquo;{TESTIMONIALS[0].quote}&rdquo;
+									&ldquo;{t.results.testimonial.quote}&rdquo;
 								</p>
 								<div>
 									<span
 										className="font-[family-name:var(--font-heading)] font-semibold text-[13px]"
 										style={{ color: '#FCF8F9' }}>
-										{TESTIMONIALS[0].name}
+										{t.results.testimonial.name}
 									</span>
 									<span
-										className="font-[family-name:var(--font-body)] font-normal text-[11px] ml-2"
+										className="font-[family-name:var(--font-body)] font-normal text-[11px] ms-2"
 										style={{ color: 'rgba(133, 210, 229, 0.6)' }}>
-										{TESTIMONIALS[0].type}
+										{t.results.testimonial.type}
 									</span>
 								</div>
 							</div>
@@ -354,12 +332,12 @@ export default function ResultsFlow() {
 					href={`/checkout?type=${sleepType}`}
 					className="btn-primary flex items-center justify-center rounded-full w-full py-4 font-[family-name:var(--font-heading)] font-bold text-[16px]"
 					style={{ backgroundColor: '#85D2E5', color: '#002224' }}>
-					Start Your Program — See Plans
+					{t.results.ctaButton}
 				</Link>
 				<p
 					className="font-[family-name:var(--font-body)] font-normal text-[11px] text-center mt-2"
 					style={{ color: 'rgba(120, 163, 166, 0.5)' }}>
-					7-day money-back guarantee
+					{t.results.ctaGuarantee}
 				</p>
 			</div>
 		</div>

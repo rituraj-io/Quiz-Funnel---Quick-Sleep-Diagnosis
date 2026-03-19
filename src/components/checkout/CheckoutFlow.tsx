@@ -4,36 +4,17 @@ import { useState, useEffect, useCallback } from 'react';
 import { useSearchParams, useRouter } from 'next/navigation';
 import Link from 'next/link';
 import Image from 'next/image';
-import type { SleepType } from '@/data/resultContent';
+import { useTranslation } from '@/i18n';
 import StripeCheckoutForm from './StripeCheckoutForm';
 
+type SleepType = 'racing_mind' | 'low_recovery';
 type PlanType = 'monthly' | 'annual';
-
-const PLANS: Record<PlanType, { price: string; perMonth: string; billed: string; badge?: string }> = {
-	monthly: {
-		price: '$14.99',
-		perMonth: '$14.99/mo',
-		billed: 'Billed monthly. Cancel anytime.',
-	},
-	annual: {
-		price: '$7.99',
-		perMonth: '$7.99/mo',
-		billed: 'Billed as $95.88/year',
-		badge: 'SAVE 47%',
-	},
-};
-
-const TRUST_SIGNALS = [
-	{ icon: 'lock', text: '256-bit SSL encryption' },
-	{ icon: 'card', text: 'Powered by Stripe' },
-	{ icon: 'check', text: '7-day money-back guarantee' },
-];
 
 export default function CheckoutFlow() {
 	const searchParams = useSearchParams();
 	const router = useRouter();
+	const { t } = useTranslation();
 	const sleepType: SleepType = searchParams.get('type') === 'low_recovery' ? 'low_recovery' : 'racing_mind';
-	const sleepLabel = sleepType === 'racing_mind' ? 'Racing Mind' : 'Low Recovery';
 
 	const [selectedPlan, setSelectedPlan] = useState<PlanType>('annual');
 	const [clientSecret, setClientSecret] = useState<string | null>(null);
@@ -65,11 +46,11 @@ export default function CheckoutFlow() {
 				setClientSecret(data.clientSecret);
 			}
 		} catch {
-			setError('Failed to connect to payment service.');
+			setError(t.checkout.paymentError);
 		} finally {
 			setLoading(false);
 		}
-	}, []);
+	}, [t.checkout.paymentError]);
 
 	useEffect(() => {
 		createPaymentIntent(selectedPlan);
@@ -112,20 +93,20 @@ export default function CheckoutFlow() {
 					<span
 						className="inline-block font-[family-name:var(--font-heading)] font-semibold text-[12px] md:text-[13px] uppercase mb-3"
 						style={{ color: '#85D2E5', letterSpacing: '1.2px' }}>
-						Your diagnosis: {sleepLabel}
+						{t.checkout.diagnosisPrefix} {t.checkout.orderSleepLabel[sleepType]}
 					</span>
 					<h1
 						className="font-[family-name:var(--font-heading)] font-bold text-[28px] md:text-[40px]"
 						style={{ color: '#FCF8F9', letterSpacing: '-1.2px' }}>
-						Choose your plan
+						{t.checkout.heading}
 					</h1>
 				</div>
 
 				<div className="max-w-[720px] mx-auto">
 					{/* ── Plan cards ── */}
 					<div className="animate-fade-up grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-5 mb-8 md:mb-10" style={{ animationDelay: '0.35s' }}>
-						{(Object.keys(PLANS) as PlanType[]).map(plan => {
-							const info = PLANS[plan];
+						{(['monthly', 'annual'] as const).map(plan => {
+							const info = t.checkout.plans[plan];
 							const isSelected = selectedPlan === plan;
 							const isRecommended = plan === 'annual';
 
@@ -134,7 +115,7 @@ export default function CheckoutFlow() {
 									key={plan}
 									type="button"
 									onClick={() => handlePlanSelect(plan)}
-									className="relative rounded-2xl p-6 md:p-8 text-left cursor-pointer transition-all duration-300"
+									className="relative rounded-2xl p-6 md:p-8 text-start cursor-pointer transition-all duration-300"
 									style={{
 										backgroundColor: 'rgba(255, 255, 255, 0.05)',
 										backdropFilter: 'blur(12px)',
@@ -144,15 +125,15 @@ export default function CheckoutFlow() {
 											: '0 2px 8px rgba(0, 0, 0, 0.1)',
 									}}>
 									{/* Badge */}
-									{info.badge && (
+									{plan === 'annual' && (
 										<span
-											className="absolute -top-3 right-5 font-[family-name:var(--font-heading)] font-bold text-[11px] uppercase px-3 py-1 rounded-full"
+											className="absolute -top-3 end-5 font-[family-name:var(--font-heading)] font-bold text-[11px] uppercase px-3 py-1 rounded-full"
 											style={{
 												backgroundColor: '#85D2E5',
 												color: '#002224',
 												letterSpacing: '0.5px',
 											}}>
-											{info.badge}
+											{t.checkout.plans.annual.badge}
 										</span>
 									)}
 
@@ -173,7 +154,7 @@ export default function CheckoutFlow() {
 										<span
 											className="font-[family-name:var(--font-heading)] font-semibold text-[14px] capitalize"
 											style={{ color: 'rgba(120, 163, 166, 0.8)' }}>
-											{plan}
+											{info.name}
 										</span>
 									</div>
 
@@ -185,9 +166,9 @@ export default function CheckoutFlow() {
 											{info.price}
 										</span>
 										<span
-											className="font-[family-name:var(--font-body)] font-normal text-[14px] ml-1"
+											className="font-[family-name:var(--font-body)] font-normal text-[14px] ms-1"
 											style={{ color: '#78A3A6' }}>
-											/month
+											{t.checkout.perMonthSuffix}
 										</span>
 									</div>
 
@@ -218,19 +199,19 @@ export default function CheckoutFlow() {
 							<h3
 								className="font-[family-name:var(--font-heading)] font-bold text-[18px] mb-3"
 								style={{ color: '#FCF8F9' }}>
-								Your order
+								{t.checkout.orderHeading}
 							</h3>
 							<div className="flex justify-between items-start">
 								<div>
 									<p
 										className="font-[family-name:var(--font-body)] font-medium text-[15px]"
 										style={{ color: '#FCF8F9' }}>
-										Drift — 21-Day Sleep Program
+										{t.checkout.orderTitle}
 									</p>
 									<p
 										className="font-[family-name:var(--font-body)] font-normal text-[13px] mt-0.5"
 										style={{ color: 'rgba(120, 163, 166, 0.8)' }}>
-										{sleepLabel} · {PLANS[selectedPlan].perMonth}
+										{t.checkout.orderSleepLabel[sleepType]} · {t.checkout.plans[selectedPlan].perMonth}
 									</p>
 								</div>
 								<span
@@ -261,7 +242,7 @@ export default function CheckoutFlow() {
 									onClick={() => createPaymentIntent(selectedPlan)}
 									className="font-[family-name:var(--font-heading)] font-semibold text-[14px] underline cursor-pointer"
 									style={{ color: '#85D2E5' }}>
-									Try again
+									{t.checkout.tryAgain}
 								</button>
 							</div>
 						) : isDemo ? (
@@ -276,7 +257,7 @@ export default function CheckoutFlow() {
 									<p
 										className="font-[family-name:var(--font-body)] font-normal text-[13px]"
 										style={{ color: 'rgba(120, 163, 166, 0.8)', lineHeight: '1.5' }}>
-										Demo mode — Stripe keys not configured. Payment will be simulated.
+										{t.checkout.demoNotice}
 									</p>
 								</div>
 
@@ -285,7 +266,7 @@ export default function CheckoutFlow() {
 									onClick={handleDemoSuccess}
 									className="btn-primary w-full rounded-xl py-4 font-[family-name:var(--font-heading)] font-bold text-[16px] cursor-pointer"
 									style={{ backgroundColor: '#85D2E5', color: '#002224' }}>
-									Start My Program (Demo)
+									{t.checkout.demoButton}
 								</button>
 							</div>
 						) : clientSecret ? (
@@ -301,13 +282,13 @@ export default function CheckoutFlow() {
 						<p
 							className="font-[family-name:var(--font-body)] font-normal text-[12px] text-center mt-4"
 							style={{ color: 'rgba(120, 163, 166, 0.6)' }}>
-							7-day money-back guarantee · Cancel anytime · Secure payment via Stripe
+							{t.checkout.microText}
 						</p>
 					</div>
 
 					{/* ── Trust signals ── */}
 					<div className="animate-fade-up flex flex-wrap items-center justify-center gap-6 md:gap-10" style={{ animationDelay: '0.65s' }}>
-						{TRUST_SIGNALS.map(signal => (
+						{t.checkout.trustSignals.map(signal => (
 							<div key={signal.text} className="flex items-center gap-2">
 								<TrustIcon type={signal.icon} />
 								<span

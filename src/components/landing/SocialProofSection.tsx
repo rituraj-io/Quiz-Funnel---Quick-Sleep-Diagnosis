@@ -3,21 +3,7 @@
 import Image from 'next/image';
 import { useEffect, useState, useRef, useCallback } from 'react';
 import { useScrollReveal } from '@/hooks/useScrollReveal';
-
-const testimonials = [
-	{
-		quote: "\"I haven't slept like this since I was a child. The 'Racing Mind' protocol is a game-changer.\"",
-		attribution: '— Sarah Jenkins, Founder',
-	},
-	{
-		quote: '"The science behind the sleep archetypes finally explained why I was never a morning person."',
-		attribution: '— Marcus T., Software Engineer',
-	},
-	{
-		quote: '"It\'s not just an app, it\'s a completely new way to look at the second half of your life."',
-		attribution: '— Dr. Linda Kim, Psychologist',
-	},
-];
+import { useTranslation } from '@/i18n';
 
 // ── Count-up hook ──
 function useCountUp(end: number, duration: number, start: boolean, decimals = 0) {
@@ -118,13 +104,14 @@ function Divider({ className = '' }: { className?: string }) {
 export default function SocialProofSection() {
 	const { ref: testimonialsRef, isVisible: testimonialsVisible } = useScrollReveal(0.1);
 	const { ref: statsRef, isVisible: statsVisible } = useScrollReveal(0.15);
+	const { t } = useTranslation();
 
 	return (
 		<section className="w-full" style={{ backgroundColor: '#FCF8F9' }}>
 			<div className="mx-auto max-w-[1280px] px-5 md:px-8 py-16 md:py-32">
 				{/* Testimonials */}
 				<div ref={testimonialsRef} className="grid grid-cols-1 gap-10 md:grid-cols-3 md:gap-12">
-					{testimonials.map((t, i) => (
+					{t.socialProof.testimonials.map((testimonial, i) => (
 						<div
 							key={i}
 							className={`flex flex-col reveal ${testimonialsVisible ? 'is-visible' : ''}`}
@@ -134,13 +121,13 @@ export default function SocialProofSection() {
 							<p
 								className="font-[family-name:var(--font-heading)] text-base md:text-xl"
 								style={{ fontWeight: 500, lineHeight: '1.6', color: '#1B1B1C' }}>
-								{t.quote}
+								{testimonial.quote}
 							</p>
 							<div className="h-4 md:h-6" />
 							<p
 								className="font-[family-name:var(--font-body)] uppercase text-xs md:text-sm"
 								style={{ fontWeight: 400, letterSpacing: '0.7px', color: '#404849' }}>
-								{t.attribution}
+								{testimonial.attribution}
 							</p>
 						</div>
 					))}
@@ -158,7 +145,7 @@ export default function SocialProofSection() {
 						<AnimatedStat
 							end={12000}
 							suffix="+"
-							label="Active Sleepers"
+							label={t.socialProof.stats.activeSleepers}
 							isVisible={statsVisible}
 							fontSize="56px"
 							lineHeight="56px"
@@ -168,7 +155,7 @@ export default function SocialProofSection() {
 							end={4.8}
 							decimals={1}
 							suffix="/5"
-							label="App Store Rating"
+							label={t.socialProof.stats.appStoreRating}
 							isVisible={statsVisible}
 							fontSize="56px"
 							lineHeight="56px"
@@ -177,7 +164,7 @@ export default function SocialProofSection() {
 						<AnimatedStat
 							end={92}
 							suffix="%"
-							label="Report Better Recovery"
+							label={t.socialProof.stats.betterRecovery}
 							isVisible={statsVisible}
 							fontSize="56px"
 							lineHeight="56px"
@@ -189,7 +176,7 @@ export default function SocialProofSection() {
 						<AnimatedStat
 							end={12000}
 							suffix="+"
-							label="Active Sleepers"
+							label={t.socialProof.stats.activeSleepers}
 							isVisible={statsVisible}
 							fontSize="40px"
 							lineHeight="40px"
@@ -199,7 +186,7 @@ export default function SocialProofSection() {
 							end={4.8}
 							decimals={1}
 							suffix="/5"
-							label="App Store Rating"
+							label={t.socialProof.stats.appStoreRating}
 							isVisible={statsVisible}
 							fontSize="40px"
 							lineHeight="40px"
@@ -208,7 +195,7 @@ export default function SocialProofSection() {
 						<AnimatedStat
 							end={92}
 							suffix="%"
-							label="Report Better Recovery"
+							label={t.socialProof.stats.betterRecovery}
 							isVisible={statsVisible}
 							fontSize="40px"
 							lineHeight="40px"

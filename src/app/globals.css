@@ -217,6 +217,30 @@ body {
 	animation: fadeUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
+/* ── Arabic font override ── */
+html.font-arabic {
+  --font-heading: var(--font-noto-arabic);
+  --font-body: var(--font-noto-arabic);
+}
+
+/* ── Russian font override (Plus Jakarta Sans lacks Cyrillic; use Manrope for headings) ── */
+html.font-russian {
+  --font-heading: var(--font-manrope);
+}
+
+/* ── RTL utilities ── */
+[dir="rtl"] .rtl-flip {
+  transform: scaleX(-1);
+}
+
+/* Results page: fixed right column → fixed left in RTL */
+@media (min-width: 768px) {
+  [dir="rtl"] .results-fixed-right {
+    right: auto;
+    left: max(2rem, calc((100vw - 1280px) / 2 + 2rem));
+  }
+}
+
 /* Respect reduced-motion preference */
 @media (prefers-reduced-motion: reduce) {
 	.animate-slide-down,
