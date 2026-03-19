@@ -24,7 +24,7 @@
 
 /* Base styles */
 body {
-	background: var(--color-vista-white);
+	background: var(--color-onyx);
 	color: var(--color-onyx);
 	font-family: var(--font-body), system-ui, sans-serif;
 	-webkit-font-smoothing: antialiased;
@@ -129,13 +129,108 @@ body {
 	box-shadow: 0 4px 12px -2px rgba(0, 34, 36, 0.15);
 }
 
+/* ── Results page: analyzing loader ── */
+@keyframes analyzeOrb {
+	0%,
+	100% {
+		transform: scale(0.8);
+		opacity: 0.4;
+	}
+	50% {
+		transform: scale(1.2);
+		opacity: 0.8;
+	}
+}
+
+@keyframes analyzeBar {
+	0%,
+	100% {
+		transform: scaleY(0.4);
+		opacity: 0.4;
+	}
+	50% {
+		transform: scaleY(1);
+		opacity: 1;
+	}
+}
+
+/* Results: fixed right column on desktop */
+@media (min-width: 768px) {
+	.results-fixed-right {
+		right: max(2rem, calc((100vw - 1280px) / 2 + 2rem));
+		width: min(calc(42% - 2.5rem), calc(1280px * 0.42 - 2.5rem));
+	}
+}
+
+/* Results staggered reveal on load */
+.results-reveal {
+	animation: fadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+/* ── Success page animations ── */
+@keyframes successFloat {
+	from {
+		transform: translateY(0px);
+		opacity: 0.3;
+	}
+	to {
+		transform: translateY(-12px);
+		opacity: 0.7;
+	}
+}
+
+@keyframes successCheckDraw {
+	from {
+		stroke-dashoffset: 48;
+	}
+	to {
+		stroke-dashoffset: 0;
+	}
+}
+
+@keyframes successCheckPop {
+	0% {
+		transform: scale(0);
+		opacity: 0;
+	}
+	60% {
+		transform: scale(1.15);
+		opacity: 1;
+	}
+	100% {
+		transform: scale(1);
+		opacity: 1;
+	}
+}
+
+.success-checkmark {
+	animation: successCheckPop 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.1s both;
+}
+
+.success-check-path {
+	stroke-dasharray: 48;
+	stroke-dashoffset: 48;
+	animation: successCheckDraw 0.5s ease-out 0.5s forwards;
+}
+
+.success-reveal {
+	animation: fadeUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
 /* Respect reduced-motion preference */
 @media (prefers-reduced-motion: reduce) {
 	.animate-slide-down,
-	.animate-fade-up {
+	.animate-fade-up,
+	.results-reveal,
+	.success-reveal,
+	.success-checkmark {
 		animation: none;
 		opacity: 1;
 		transform: none;
+	}
+	.success-check-path {
+		stroke-dashoffset: 0;
+		animation: none;
 	}
 	.reveal {
 		opacity: 1;

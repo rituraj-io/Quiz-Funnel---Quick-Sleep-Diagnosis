@@ -75,7 +75,7 @@ export default function HeroSection() {
 						/>
 						{/* Subtle dark overlay that lightens on hover */}
 						<div
-							className="absolute inset-0 transition-opacity duration-300 group-hover:opacity-60 opacity-40"
+							className="absolute inset-0 transition-opacity duration-300 group-hover:opacity-30 opacity-15"
 							style={{ backgroundColor: '#002224' }}
 						/>
 						{/* Play button — scales up on hover */}

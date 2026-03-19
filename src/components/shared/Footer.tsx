@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
+import ScrollReveal from '@/components/shared/ScrollReveal';
 
 const NAV_COLUMNS = [
 	{
@@ -31,6 +32,7 @@ const NAV_COLUMNS = [
 export default function Footer() {
 	return (
 		<footer style={{ backgroundColor: '#0A090C' }}>
+			<ScrollReveal>
 			<div className="mx-auto max-w-[1280px] px-5 md:px-8 py-12 md:py-20">
 				{/* Top section */}
 				<div className="grid grid-cols-2 gap-8 md:grid-cols-6 md:gap-12">
@@ -131,6 +133,7 @@ export default function Footer() {
 					</div>
 				</div>
 			</div>
+			</ScrollReveal>
 		</footer>
 	);
 }

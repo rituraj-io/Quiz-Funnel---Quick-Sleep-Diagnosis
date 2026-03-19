@@ -33,9 +33,7 @@ export default function Home() {
 				</ScrollReveal>
 			</main>
 
-			<ScrollReveal>
-				<Footer />
-			</ScrollReveal>
+			<Footer />
 		</>
 	);
 }
