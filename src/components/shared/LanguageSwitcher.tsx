@@ -36,7 +36,7 @@ export default function LanguageSwitcher() {
 		return () => document.removeEventListener('keydown', handleKey);
 	}, [open]);
 
-	const current = LANGUAGES.find((l) => l.code === locale)!;
+	const current = LANGUAGES.find(l => l.code === locale)!;
 
 	return (
 		<div ref={ref} className="relative">
@@ -70,7 +70,7 @@ export default function LanguageSwitcher() {
 					transform: open ? 'translateY(0)' : 'translateY(-4px)',
 					pointerEvents: open ? 'auto' : 'none',
 				}}>
-				{LANGUAGES.map((lang) => (
+				{LANGUAGES.map(lang => (
 					<button
 						key={lang.code}
 						type="button"
@@ -84,8 +84,7 @@ export default function LanguageSwitcher() {
 								: 'font-normal text-stormy-teal opacity-70'
 						}`}>
 						<span>
-							{lang.label}{' '}
-							<span className="opacity-50">({lang.short})</span>
+							{lang.label} <span className="opacity-50">({lang.short})</span>
 						</span>
 						{locale === lang.code && (
 							<svg

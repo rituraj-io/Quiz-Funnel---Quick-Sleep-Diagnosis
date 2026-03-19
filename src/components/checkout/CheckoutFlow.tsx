@@ -22,35 +22,38 @@ export default function CheckoutFlow() {
 	const [loading, setLoading] = useState(false);
 	const [error, setError] = useState<string | null>(null);
 
-	const createPaymentIntent = useCallback(async (plan: PlanType) => {
-		setLoading(true);
-		setError(null);
-		try {
-			const res = await fetch('/api/create-payment-intent', {
-				method: 'POST',
-				headers: { 'Content-Type': 'application/json' },
-				body: JSON.stringify({ planType: plan }),
-			});
-			const data = await res.json();
+	const createPaymentIntent = useCallback(
+		async (plan: PlanType) => {
+			setLoading(true);
+			setError(null);
+			try {
+				const res = await fetch('/api/create-payment-intent', {
+					method: 'POST',
+					headers: { 'Content-Type': 'application/json' },
+					body: JSON.stringify({ planType: plan }),
+				});
+				const data = await res.json();
 
-			if (data.error) {
-				setError(data.error);
-				return;
-			}
+				if (data.error) {
+					setError(data.error);
+					return;
+				}
 
-			if (data.demo) {
-				setIsDemo(true);
-				setClientSecret(null);
-			} else {
-				setIsDemo(false);
-				setClientSecret(data.clientSecret);
+				if (data.demo) {
+					setIsDemo(true);
+					setClientSecret(null);
+				} else {
+					setIsDemo(false);
+					setClientSecret(data.clientSecret);
+				}
+			} catch {
+				setError(t.checkout.paymentError);
+			} finally {
+				setLoading(false);
 			}
-		} catch {
-			setError(t.checkout.paymentError);
-		} finally {
-			setLoading(false);
-		}
-	}, [t.checkout.paymentError]);
+		},
+		[t.checkout.paymentError]
+	);
 
 	useEffect(() => {
 		createPaymentIntent(selectedPlan);
@@ -69,7 +72,9 @@ export default function CheckoutFlow() {
 	return (
 		<div className="min-h-screen" style={{ background: 'linear-gradient(180deg, #0A090C 0%, #07393C 100%)' }}>
 			{/* ── Header ── */}
-			<header className="animate-fade-up mx-auto max-w-[1280px] w-full px-5 md:px-8 pt-5 md:pt-6 pb-4" style={{ animationDelay: '0.1s' }}>
+			<header
+				className="animate-fade-up mx-auto max-w-[1280px] w-full px-5 md:px-8 pt-5 md:pt-6 pb-4"
+				style={{ animationDelay: '0.1s' }}>
 				<Link href="/" className="flex items-center gap-2 w-fit">
 					<Image
 						src="/images/drift-logo-light.svg"
@@ -89,7 +94,9 @@ export default function CheckoutFlow() {
 
 			<main className="mx-auto max-w-[1280px] w-full px-5 md:px-8 pb-16 md:pb-24">
 				{/* Page heading */}
-				<div className="animate-fade-up text-center pt-8 md:pt-14 mb-8 md:mb-12" style={{ animationDelay: '0.2s' }}>
+				<div
+					className="animate-fade-up text-center pt-8 md:pt-14 mb-8 md:mb-12"
+					style={{ animationDelay: '0.2s' }}>
 					<span
 						className="inline-block font-[family-name:var(--font-heading)] font-semibold text-[12px] md:text-[13px] uppercase mb-3"
 						style={{ color: '#85D2E5', letterSpacing: '1.2px' }}>
@@ -104,7 +111,9 @@ export default function CheckoutFlow() {
 
 				<div className="max-w-[720px] mx-auto">
 					{/* ── Plan cards ── */}
-					<div className="animate-fade-up grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-5 mb-8 md:mb-10" style={{ animationDelay: '0.35s' }}>
+					<div
+						className="animate-fade-up grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-5 mb-8 md:mb-10"
+						style={{ animationDelay: '0.35s' }}>
 						{(['monthly', 'annual'] as const).map(plan => {
 							const info = t.checkout.plans[plan];
 							const isSelected = selectedPlan === plan;
@@ -211,7 +220,8 @@ export default function CheckoutFlow() {
 									<p
 										className="font-[family-name:var(--font-body)] font-normal text-[13px] mt-0.5"
 										style={{ color: 'rgba(120, 163, 166, 0.8)' }}>
-										{t.checkout.orderSleepLabel[sleepType]} · {t.checkout.plans[selectedPlan].perMonth}
+										{t.checkout.orderSleepLabel[sleepType]} ·{' '}
+										{t.checkout.plans[selectedPlan].perMonth}
 									</p>
 								</div>
 								<span
@@ -287,7 +297,9 @@ export default function CheckoutFlow() {
 					</div>
 
 					{/* ── Trust signals ── */}
-					<div className="animate-fade-up flex flex-wrap items-center justify-center gap-6 md:gap-10" style={{ animationDelay: '0.65s' }}>
+					<div
+						className="animate-fade-up flex flex-wrap items-center justify-center gap-6 md:gap-10"
+						style={{ animationDelay: '0.65s' }}>
 						{t.checkout.trustSignals.map(signal => (
 							<div key={signal.text} className="flex items-center gap-2">
 								<TrustIcon type={signal.icon} />

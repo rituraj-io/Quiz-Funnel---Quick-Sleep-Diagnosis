@@ -104,32 +104,32 @@ export default function Header() {
 				{/* Mobile: language switcher + hamburger */}
 				<div className="md:hidden flex items-center gap-2">
 					<LanguageSwitcher />
-				<button
-					ref={buttonRef}
-					type="button"
-					className="flex flex-col justify-center items-center w-10 h-10 cursor-pointer"
-					onClick={() => setMenuOpen(!menuOpen)}
-					aria-label={menuOpen ? 'Close menu' : 'Open menu'}
-					aria-expanded={menuOpen}>
-					<span
-						className="block h-[2px] w-6 bg-[#0A090C] rounded-full transition-all duration-300 ease-in-out"
-						style={{
-							transform: menuOpen ? 'rotate(45deg) translateY(0px)' : 'rotate(0deg) translateY(-4px)',
-						}}
-					/>
-					<span
-						className="block h-[2px] w-6 bg-[#0A090C] rounded-full transition-all duration-300 ease-in-out"
-						style={{
-							opacity: menuOpen ? 0 : 1,
-						}}
-					/>
-					<span
-						className="block h-[2px] w-6 bg-[#0A090C] rounded-full transition-all duration-300 ease-in-out"
-						style={{
-							transform: menuOpen ? 'rotate(-45deg) translateY(0px)' : 'rotate(0deg) translateY(4px)',
-						}}
-					/>
-				</button>
+					<button
+						ref={buttonRef}
+						type="button"
+						className="flex flex-col justify-center items-center w-10 h-10 cursor-pointer"
+						onClick={() => setMenuOpen(!menuOpen)}
+						aria-label={menuOpen ? 'Close menu' : 'Open menu'}
+						aria-expanded={menuOpen}>
+						<span
+							className="block h-[2px] w-6 bg-[#0A090C] rounded-full transition-all duration-300 ease-in-out"
+							style={{
+								transform: menuOpen ? 'rotate(45deg) translateY(0px)' : 'rotate(0deg) translateY(-4px)',
+							}}
+						/>
+						<span
+							className="block h-[2px] w-6 bg-[#0A090C] rounded-full transition-all duration-300 ease-in-out"
+							style={{
+								opacity: menuOpen ? 0 : 1,
+							}}
+						/>
+						<span
+							className="block h-[2px] w-6 bg-[#0A090C] rounded-full transition-all duration-300 ease-in-out"
+							style={{
+								transform: menuOpen ? 'rotate(-45deg) translateY(0px)' : 'rotate(0deg) translateY(4px)',
+							}}
+						/>
+					</button>
 				</div>
 			</div>
 

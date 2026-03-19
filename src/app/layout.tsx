@@ -36,8 +36,7 @@ export const metadata: Metadata = {
 	],
 	openGraph: {
 		title: 'Drift — Sleep better in 21 nights',
-		description:
-			'Identify your unique Sleep Architecture and get a personalized path to deep, restorative rest.',
+		description: 'Identify your unique Sleep Architecture and get a personalized path to deep, restorative rest.',
 		url: 'https://drift-sleep.vercel.app',
 		siteName: 'Drift',
 		images: [
@@ -45,7 +44,7 @@ export const metadata: Metadata = {
 				url: '/images/drift-homepage.png',
 				width: 1200,
 				height: 630,
-				alt: 'Drift — Your sleep problems aren\'t random',
+				alt: "Drift — Your sleep problems aren't random",
 			},
 		],
 		locale: 'en_US',
@@ -54,8 +53,7 @@ export const metadata: Metadata = {
 	twitter: {
 		card: 'summary_large_image',
 		title: 'Drift — Sleep better in 21 nights',
-		description:
-			'Identify your unique Sleep Architecture and get a personalized path to deep, restorative rest.',
+		description: 'Identify your unique Sleep Architecture and get a personalized path to deep, restorative rest.',
 		images: ['/images/drift-homepage.png'],
 	},
 };
@@ -69,8 +67,7 @@ export default function RootLayout({
 		<html
 			lang="en"
 			suppressHydrationWarning
-			className={`${plusJakartaSans.variable} ${manrope.variable} ${notoSansArabic.variable}`}
-		>
+			className={`${plusJakartaSans.variable} ${manrope.variable} ${notoSansArabic.variable}`}>
 			<head>
 				<script
 					dangerouslySetInnerHTML={{

@@ -169,9 +169,7 @@ export default function ResultsFlow() {
 						</section>
 
 						{/* ── Section 3: Your protocol includes ── */}
-						<section
-							className="mb-28 md:mb-20 results-reveal"
-							style={{ animationDelay: '0.3s' }}>
+						<section className="mb-28 md:mb-20 results-reveal" style={{ animationDelay: '0.3s' }}>
 							<h2
 								className="font-[family-name:var(--font-heading)] font-bold text-[22px] md:text-[28px] mb-6 md:mb-10 text-center md:text-start"
 								style={{ color: '#FCF8F9', letterSpacing: '-1px' }}>
@@ -221,102 +219,106 @@ export default function ResultsFlow() {
 					{/* ── Right column: fixed in viewport on desktop ── */}
 					<div className="pb-28 md:pb-0 md:flex-[0_0_42%]">
 						<div className="md:fixed md:top-0 md:h-screen md:flex md:items-center results-fixed-right">
-						<div className="w-full">
-							{/* ── CTA — above the fold ── */}
-							<section
-								className="text-center mb-6 md:mb-8 results-reveal"
-								style={{ animationDelay: '0.15s' }}>
-								<h2
-									className="font-[family-name:var(--font-heading)] font-bold text-[22px] md:text-[28px] mb-3 md:mb-4"
-									style={{ color: '#FCF8F9', letterSpacing: '-1px' }}>
-									{t.results.ctaHeading}
-								</h2>
-								<p
-									className="font-[family-name:var(--font-body)] font-normal text-[14px] md:text-[16px] mb-5 md:mb-6"
-									style={{ color: 'rgba(120, 163, 166, 0.7)', lineHeight: '1.6' }}>
-									{t.results.ctaSubtext}
-								</p>
+							<div className="w-full">
+								{/* ── CTA — above the fold ── */}
+								<section
+									className="text-center mb-6 md:mb-8 results-reveal"
+									style={{ animationDelay: '0.15s' }}>
+									<h2
+										className="font-[family-name:var(--font-heading)] font-bold text-[22px] md:text-[28px] mb-3 md:mb-4"
+										style={{ color: '#FCF8F9', letterSpacing: '-1px' }}>
+										{t.results.ctaHeading}
+									</h2>
+									<p
+										className="font-[family-name:var(--font-body)] font-normal text-[14px] md:text-[16px] mb-5 md:mb-6"
+										style={{ color: 'rgba(120, 163, 166, 0.7)', lineHeight: '1.6' }}>
+										{t.results.ctaSubtext}
+									</p>
 
-								{/* Desktop-only button (mobile uses sticky footer) */}
-								<Link
-									href={`/checkout?type=${sleepType}`}
-									className="hidden md:inline-flex btn-primary items-center justify-center rounded-full px-10 py-4 font-[family-name:var(--font-heading)] font-bold text-[16px]"
-									style={{ backgroundColor: '#85D2E5', color: '#002224' }}>
-									{t.results.ctaButton}
-								</Link>
+									{/* Desktop-only button (mobile uses sticky footer) */}
+									<Link
+										href={`/checkout?type=${sleepType}`}
+										className="hidden md:inline-flex btn-primary items-center justify-center rounded-full px-10 py-4 font-[family-name:var(--font-heading)] font-bold text-[16px]"
+										style={{ backgroundColor: '#85D2E5', color: '#002224' }}>
+										{t.results.ctaButton}
+									</Link>
 
-								<p
-									className="hidden md:block font-[family-name:var(--font-body)] font-normal text-[12px] mt-3"
-									style={{ color: 'rgba(120, 163, 166, 0.5)' }}>
-									{t.results.ctaGuarantee}
-								</p>
-							</section>
+									<p
+										className="hidden md:block font-[family-name:var(--font-body)] font-normal text-[12px] mt-3"
+										style={{ color: 'rgba(120, 163, 166, 0.5)' }}>
+										{t.results.ctaGuarantee}
+									</p>
+								</section>
 
-							{/* ── Inline stats — single row, no card ── */}
-							<div
-								className="flex items-center justify-center gap-3 md:gap-5 mb-6 md:mb-8 results-reveal"
-								style={{ animationDelay: '0.3s' }}>
-								{t.results.stats.map((stat, i) => (
-									<div key={stat.label} className="flex items-center gap-3 md:gap-5">
-										<div className="text-center">
-											<span
-												className="font-[family-name:var(--font-heading)] font-bold text-[18px] md:text-[22px] block"
-												style={{ color: '#85D2E5', letterSpacing: '-0.5px', lineHeight: '1.2' }}>
-												{stat.value}
-											</span>
-											<span
-												className="font-[family-name:var(--font-body)] font-normal text-[10px] md:text-[12px]"
-												style={{ color: 'rgba(120, 163, 166, 0.5)' }}>
-												{stat.label}
-											</span>
+								{/* ── Inline stats — single row, no card ── */}
+								<div
+									className="flex items-center justify-center gap-3 md:gap-5 mb-6 md:mb-8 results-reveal"
+									style={{ animationDelay: '0.3s' }}>
+									{t.results.stats.map((stat, i) => (
+										<div key={stat.label} className="flex items-center gap-3 md:gap-5">
+											<div className="text-center">
+												<span
+													className="font-[family-name:var(--font-heading)] font-bold text-[18px] md:text-[22px] block"
+													style={{
+														color: '#85D2E5',
+														letterSpacing: '-0.5px',
+														lineHeight: '1.2',
+													}}>
+													{stat.value}
+												</span>
+												<span
+													className="font-[family-name:var(--font-body)] font-normal text-[10px] md:text-[12px]"
+													style={{ color: 'rgba(120, 163, 166, 0.5)' }}>
+													{stat.label}
+												</span>
+											</div>
+											{i < t.results.stats.length - 1 && (
+												<div
+													style={{
+														width: '1px',
+														height: '32px',
+														backgroundColor: 'rgba(133, 210, 229, 0.15)',
+													}}
+												/>
+											)}
 										</div>
-										{i < t.results.stats.length - 1 && (
-											<div
-												style={{
-													width: '1px',
-													height: '32px',
-													backgroundColor: 'rgba(133, 210, 229, 0.15)',
-												}}
-											/>
-										)}
-									</div>
-								))}
-							</div>
-
-							{/* ── Single testimonial ── */}
-							<div
-								className="rounded-xl p-4 md:p-5 results-reveal"
-								style={{
-									backgroundColor: 'rgba(255, 255, 255, 0.04)',
-									border: '1px solid rgba(44, 102, 110, 0.2)',
-									animationDelay: '0.45s',
-								}}>
-								<div className="flex gap-1 mb-2">
-									{[...Array(5)].map((_, i) => (
-										<svg key={i} width="14" height="14" viewBox="0 0 16 16" fill="#85D2E5">
-											<path d="M8 0.5L9.79 5.73L15.31 6.18L11.13 9.77L12.44 15.15L8 12.35L3.56 15.15L4.87 9.77L0.69 6.18L6.21 5.73L8 0.5Z" />
-										</svg>
 									))}
 								</div>
-								<p
-									className="font-[family-name:var(--font-body)] font-normal text-[13px] md:text-[14px] mb-3"
-									style={{ lineHeight: '1.6', color: 'rgba(252, 248, 249, 0.8)' }}>
-									&ldquo;{t.results.testimonial.quote}&rdquo;
-								</p>
-								<div>
-									<span
-										className="font-[family-name:var(--font-heading)] font-semibold text-[13px]"
-										style={{ color: '#FCF8F9' }}>
-										{t.results.testimonial.name}
-									</span>
-									<span
-										className="font-[family-name:var(--font-body)] font-normal text-[11px] ms-2"
-										style={{ color: 'rgba(133, 210, 229, 0.6)' }}>
-										{t.results.testimonial.type}
-									</span>
+
+								{/* ── Single testimonial ── */}
+								<div
+									className="rounded-xl p-4 md:p-5 results-reveal"
+									style={{
+										backgroundColor: 'rgba(255, 255, 255, 0.04)',
+										border: '1px solid rgba(44, 102, 110, 0.2)',
+										animationDelay: '0.45s',
+									}}>
+									<div className="flex gap-1 mb-2">
+										{[...Array(5)].map((_, i) => (
+											<svg key={i} width="14" height="14" viewBox="0 0 16 16" fill="#85D2E5">
+												<path d="M8 0.5L9.79 5.73L15.31 6.18L11.13 9.77L12.44 15.15L8 12.35L3.56 15.15L4.87 9.77L0.69 6.18L6.21 5.73L8 0.5Z" />
+											</svg>
+										))}
+									</div>
+									<p
+										className="font-[family-name:var(--font-body)] font-normal text-[13px] md:text-[14px] mb-3"
+										style={{ lineHeight: '1.6', color: 'rgba(252, 248, 249, 0.8)' }}>
+										&ldquo;{t.results.testimonial.quote}&rdquo;
+									</p>
+									<div>
+										<span
+											className="font-[family-name:var(--font-heading)] font-semibold text-[13px]"
+											style={{ color: '#FCF8F9' }}>
+											{t.results.testimonial.name}
+										</span>
+										<span
+											className="font-[family-name:var(--font-body)] font-normal text-[11px] ms-2"
+											style={{ color: 'rgba(133, 210, 229, 0.6)' }}>
+											{t.results.testimonial.type}
+										</span>
+									</div>
 								</div>
 							</div>
-						</div>
 						</div>
 					</div>
 				</div>
