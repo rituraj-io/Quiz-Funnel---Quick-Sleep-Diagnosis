@@ -88,7 +88,7 @@ export default function CheckoutFlow() {
 	return (
 		<div className="min-h-screen" style={{ background: 'linear-gradient(180deg, #0A090C 0%, #07393C 100%)' }}>
 			{/* ── Header ── */}
-			<header className="mx-auto max-w-[1280px] w-full px-5 md:px-8 pt-5 md:pt-6 pb-4">
+			<header className="animate-fade-up mx-auto max-w-[1280px] w-full px-5 md:px-8 pt-5 md:pt-6 pb-4" style={{ animationDelay: '0.1s' }}>
 				<Link href="/" className="flex items-center gap-2 w-fit">
 					<Image
 						src="/images/drift-logo-light.svg"
@@ -108,7 +108,7 @@ export default function CheckoutFlow() {
 
 			<main className="mx-auto max-w-[1280px] w-full px-5 md:px-8 pb-16 md:pb-24">
 				{/* Page heading */}
-				<div className="text-center pt-8 md:pt-14 mb-8 md:mb-12">
+				<div className="animate-fade-up text-center pt-8 md:pt-14 mb-8 md:mb-12" style={{ animationDelay: '0.2s' }}>
 					<span
 						className="inline-block font-[family-name:var(--font-heading)] font-semibold text-[12px] md:text-[13px] uppercase mb-3"
 						style={{ color: '#85D2E5', letterSpacing: '1.2px' }}>
@@ -123,7 +123,7 @@ export default function CheckoutFlow() {
 
 				<div className="max-w-[720px] mx-auto">
 					{/* ── Plan cards ── */}
-					<div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-5 mb-8 md:mb-10">
+					<div className="animate-fade-up grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-5 mb-8 md:mb-10" style={{ animationDelay: '0.35s' }}>
 						{(Object.keys(PLANS) as PlanType[]).map(plan => {
 							const info = PLANS[plan];
 							const isSelected = selectedPlan === plan;
@@ -203,8 +203,9 @@ export default function CheckoutFlow() {
 
 					{/* ── Order summary + Payment ── */}
 					<div
-						className="rounded-2xl md:rounded-3xl p-6 md:p-8 mb-6 md:mb-8"
+						className="animate-fade-up rounded-2xl md:rounded-3xl p-6 md:p-8 mb-6 md:mb-8"
 						style={{
+							animationDelay: '0.5s',
 							backgroundColor: 'rgba(255, 255, 255, 0.04)',
 							backdropFilter: 'blur(12px)',
 							border: '1px solid rgba(44, 102, 110, 0.2)',
@@ -305,7 +306,7 @@ export default function CheckoutFlow() {
 					</div>
 
 					{/* ── Trust signals ── */}
-					<div className="flex flex-wrap items-center justify-center gap-6 md:gap-10">
+					<div className="animate-fade-up flex flex-wrap items-center justify-center gap-6 md:gap-10" style={{ animationDelay: '0.65s' }}>
 						{TRUST_SIGNALS.map(signal => (
 							<div key={signal.text} className="flex items-center gap-2">
 								<TrustIcon type={signal.icon} />

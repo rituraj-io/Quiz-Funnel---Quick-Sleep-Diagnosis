@@ -110,7 +110,7 @@ export default function QuizFlow() {
 			/>
 
 			{/* Top bar: logo + progress */}
-			<div className="relative z-10 mx-auto max-w-[1280px] w-full px-5 md:px-8 pt-5 md:pt-6 pb-4">
+			<div className="animate-fade-up relative z-10 mx-auto max-w-[1280px] w-full px-5 md:px-8 pt-5 md:pt-6 pb-4" style={{ animationDelay: '0.1s' }}>
 				{/* Logo */}
 				<div className="flex items-center justify-between mb-6 md:mb-8">
 					<Link href="/" className="flex items-center gap-2">
@@ -153,7 +153,7 @@ export default function QuizFlow() {
 			</div>
 
 			{/* Main content area */}
-			<div className="flex-1 flex flex-col items-center justify-center relative z-10 mx-auto max-w-[1280px] w-full px-5 md:px-8 pb-8">
+			<div className="animate-fade-up flex-1 flex flex-col items-center justify-center relative z-10 mx-auto max-w-[1280px] w-full px-5 md:px-8 pb-8" style={{ animationDelay: '0.3s' }}>
 				{/* Question container with animation */}
 				<div
 					className="w-full max-w-[1024px] quiz-slide"
