@@ -7,7 +7,7 @@ export default function NotFound() {
 	const { t } = useTranslation();
 
 	return (
-		<main className="relative min-h-screen w-full bg-gradient-to-b from-[#0A090C] to-[#07393C] flex flex-col items-center justify-center px-5 overflow-hidden">
+		<main className="relative min-h-dvh w-full bg-gradient-to-b from-[#0A090C] to-[#07393C] flex flex-col items-center justify-center px-5 overflow-hidden">
 			{/* Ambient decorative orbs */}
 			<div
 				className="pointer-events-none absolute top-[15%] left-[10%] w-[260px] h-[260px] rounded-full blur-[120px] opacity-20"

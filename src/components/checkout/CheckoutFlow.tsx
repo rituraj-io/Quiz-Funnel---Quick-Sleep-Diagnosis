@@ -70,7 +70,7 @@ export default function CheckoutFlow() {
 	const billedAmount = selectedPlan === 'monthly' ? '$14.99' : '$95.88';
 
 	return (
-		<div className="min-h-screen" style={{ background: 'linear-gradient(180deg, #0A090C 0%, #07393C 100%)' }}>
+		<div className="min-h-dvh" style={{ background: 'linear-gradient(180deg, #0A090C 0%, #07393C 100%)' }}>
 			{/* ── Header ── */}
 			<header
 				className="animate-fade-up mx-auto max-w-[1280px] w-full px-5 md:px-8 pt-5 md:pt-6 pb-4"

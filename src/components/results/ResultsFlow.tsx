@@ -26,7 +26,7 @@ export default function ResultsFlow() {
 	if (phase === 'analyzing') {
 		return (
 			<div
-				className="min-h-screen flex flex-col items-center justify-center relative overflow-hidden"
+				className="min-h-dvh flex flex-col items-center justify-center relative overflow-hidden"
 				style={{ background: 'linear-gradient(180deg, #0A090C 0%, #07393C 100%)' }}>
 				{/* Pulsing orb */}
 				<div
@@ -72,7 +72,7 @@ export default function ResultsFlow() {
 	/* ── Results page ── */
 	return (
 		<div
-			className="min-h-screen relative overflow-x-clip"
+			className="min-h-dvh relative overflow-x-clip"
 			style={{ background: 'linear-gradient(180deg, #0A090C 0%, #07393C 50%, #002224 100%)' }}>
 			{/* Ambient glow */}
 			<div

@@ -14,7 +14,7 @@ export default function SuccessFlow() {
 
 	return (
 		<div
-			className="min-h-screen relative overflow-hidden"
+			className="min-h-dvh relative overflow-hidden"
 			style={{ background: 'linear-gradient(180deg, #0A090C 0%, #07393C 100%)' }}>
 			{/* Ambient particles / glow */}
 			<div

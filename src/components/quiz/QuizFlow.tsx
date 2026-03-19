@@ -85,7 +85,7 @@ export default function QuizFlow() {
 
 	return (
 		<div
-			className="min-h-screen flex flex-col relative overflow-hidden"
+			className="min-h-dvh flex flex-col relative overflow-hidden"
 			style={{ background: 'linear-gradient(180deg, #002224 0%, #07393C 100%)' }}>
 			{/* Ambient background blurs */}
 			<div
